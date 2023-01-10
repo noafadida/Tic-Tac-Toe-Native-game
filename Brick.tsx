@@ -39,7 +39,6 @@ const Brick: FC<{
         style={[styles.button, { backgroundColor: getBackground() }]}
         onPress={onClick}
       >
-        {/* <Image style={styles.img} source={require(`./assets/x.png`)}></Image> */}
         {pressed[index] === 1 && (
           <Image style={styles.img} source={require(`./assets/x.png`)}></Image>
         )}

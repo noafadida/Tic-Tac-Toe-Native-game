@@ -5,6 +5,7 @@ import {
   Text,
   Button,
   Pressable,
+  Alert,
 } from "react-native";
 import { useState, FC } from "react";
 import Brick from "./Brick";
@@ -12,6 +13,7 @@ import Brick from "./Brick";
 const App: FC = () => {
   const initialPressed = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   const [turn, setTurn] = useState(1);
+  const [win, setWin] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [pressed, setPressed] = useState(initialPressed);
 
@@ -22,6 +24,7 @@ const App: FC = () => {
       pressed[1] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -30,6 +33,7 @@ const App: FC = () => {
       pressed[4] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -38,6 +42,7 @@ const App: FC = () => {
       pressed[7] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -46,6 +51,7 @@ const App: FC = () => {
       pressed[3] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -54,6 +60,7 @@ const App: FC = () => {
       pressed[7] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -62,6 +69,7 @@ const App: FC = () => {
       pressed[5] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -70,6 +78,7 @@ const App: FC = () => {
       pressed[4] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
       return true;
     }
     if (
@@ -78,6 +87,15 @@ const App: FC = () => {
       pressed[6] !== 0
     ) {
       setGameOver(true);
+      setWin(true);
+      return true;
+    }
+    let result = pressed.filter((i) => i === 0);
+    if (result.length === 0) {
+      // console.log("game over1!!")
+      // Alert.alert("game over!")
+      setGameOver(true);
+      setWin(false);
       return true;
     }
   };
@@ -93,6 +111,7 @@ const App: FC = () => {
   const clearButton = () => {
     setPressed(initialPressed);
     setGameOver(false);
+    setWin(false)
     setTurn(1);
   };
 
@@ -172,7 +191,8 @@ const App: FC = () => {
         ></Brick>
       </View>
       <Text style={styles.title}>
-        {gameOver ? `Game Over! Player ${turn} Win!` : "Let's Start!"}
+        {gameOver ? "Game Over!" : "Let's Start!"}
+        {win ? ` Player ${turn} Win!` : ""}
       </Text>
     </View>
   );
@@ -196,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     textAlign: "center",
     marginVertical: 16,
-    color:"#A2B5BB"
+    color: "#A2B5BB",
   },
   title: {
     fontSize: 30,
